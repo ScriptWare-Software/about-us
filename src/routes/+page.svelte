@@ -1,19 +1,18 @@
 <script lang="ts">
-  import { Metaballs } from 'svelte-metaballs';
+  import MetaballPage from '$lib/components/util/MetaballPage.svelte';
+  import Logo from '$lib/components/branding/Logo.svelte';
 </script>
 
-<div
-  class="fixed top-0 left-0 w-screen h-screen bg-black flex items-center justify-center text-white"
->
-  <div class="meatballs">
-    <Metaballs />
+<MetaballPage />
+
+<div class="main w-screen h-screen">
+  <div class="hero">
+    <h1 class="text-4xl font-bold">
+      <Logo />
+    </h1>
+    <p>
+      We bottle water into scripts (dangerous cuz electricity is involved with
+      scripts)
+    </p>
   </div>
 </div>
-
-<style lang="scss">
-  .meatballs {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-  }
-</style>

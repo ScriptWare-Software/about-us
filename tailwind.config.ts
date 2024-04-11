@@ -15,8 +15,9 @@ export default {
         '5xl': '4.210rem',
       },
       fontFamily: {
-        heading: 'Inter Tight',
-        body: 'Inter',
+        heading: 'Poppins',
+        logo: 'Poppins',
+        body: 'Poppins',
       },
       fontWeight: {
         thin: '300',
