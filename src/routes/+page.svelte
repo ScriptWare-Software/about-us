@@ -10,6 +10,7 @@
   <meta name="description" content="Accelerating what makes execution fun!" />
   <meta name="image" content="/favicon.png" />
   <meta name="og:image" content="/favicon.png" />
+  <meta name="theme-color" content="#429bfb" />
 </svelte:head>
 
 <div
