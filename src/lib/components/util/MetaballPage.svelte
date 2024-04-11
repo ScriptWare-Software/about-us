@@ -8,6 +8,13 @@
   <div
     class="meatballs relative w-screen h-screen pointer-events-none -z-10 bg-background-pure"
   >
-    <Metaballs />
+    <Metaballs
+      cornerColors={[
+        [0x31, 0xbc, 0xd8, 0xff],
+        [0x42, 0x9b, 0xfb, 0xff],
+        [0x31, 0xbc, 0xd8, 0xff],
+        [0x42, 0x9b, 0xfb, 0xff],
+      ]}
+    />
   </div>
 </div>
