@@ -5,6 +5,11 @@
 
 <MetaballPage />
 
+<svelte:head>
+  <title>Script-Ware Solutions LLC</title>
+  <meta name="description" content="Accelerating what makes execution fun!" />
+</svelte:head>
+
 <div
   class="header top-0 sticky w-screen flex items-center justify-center bg-black bg-opacity-20 backdrop-blur-xl"
 >
