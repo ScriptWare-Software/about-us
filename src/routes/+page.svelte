@@ -18,7 +18,7 @@
       class="fixed top-[50vh] left-[50vw] translate-x-[-50%] translate-y-[-50%] flex items-center content-center flex-col backdrop-blur-xl rounded-xl p-8"
     >
       <h1 class="text-4xl font-bold -mb-4 -mt-8">
-        <Logo height={169} />
+        <a href="https://discord.gg/scripting"><Logo height={169} /></a>
       </h1>
       <p class="text-xl">Accelerating what makes execution fun!</p>
     </div>
