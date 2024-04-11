@@ -15,12 +15,12 @@
     class="hero h-[32rem] min-h-max max-h-screen flex items-center justify-center flex-col"
   >
     <div
-      class="inner max-w-[90vw] p-8 backdrop-blur-md rounded-xl flex items-center content-center flex-col"
+      class="fixed top-[50vh] left-[50vw] translate-x-[-50%] translate-y-[-50%] flex items-center content-center flex-col backdrop-blur-xl rounded-xl p-8"
     >
       <h1 class="text-4xl font-bold -mb-4 -mt-8">
-        <Logo height={125} />
+        <Logo height={169} />
       </h1>
-      <p>Accelerating what makes execution fun!</p>
+      <p class="text-xl">Accelerating what makes execution fun!</p>
     </div>
   </div>
 </div>
