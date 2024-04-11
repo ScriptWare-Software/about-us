@@ -6,8 +6,10 @@
 <MetaballPage />
 
 <svelte:head>
-  <title>Script-Ware Solutions LLC</title>
+  <title>Script-Ware</title>
   <meta name="description" content="Accelerating what makes execution fun!" />
+  <meta name="image" content="/favicon.png" />
+  <meta name="og:image" content="/favicon.png" />
 </svelte:head>
 
 <div
