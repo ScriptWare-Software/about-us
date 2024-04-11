@@ -15,7 +15,7 @@
     class="hero h-[32rem] min-h-max max-h-screen flex items-center justify-center flex-col"
   >
     <div
-      class="inner max-w-[90vw] w-[64rem] p-8 backdrop-blur-md rounded-xl flex items-center content-center flex-col"
+      class="inner max-w-[90vw] p-8 backdrop-blur-md rounded-xl flex items-center content-center flex-col"
     >
       <h1 class="text-4xl font-bold -mb-4 -mt-8">
         <Logo height={125} />
