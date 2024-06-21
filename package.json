@@ -27,6 +27,7 @@
   },
   "type": "module",
   "dependencies": {
+    "lucide-svelte": "^0.396.0",
     "svelte-metaballs": "^0.1.1"
   }
 }
