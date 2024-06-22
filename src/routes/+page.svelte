@@ -3,12 +3,11 @@
   import MetaballPage from '$lib/components/util/MetaballPage.svelte';
   import Logo from '$lib/components/branding/logo/WideLogo.svelte';
   import GitHubLogo from '$lib/components/branding/logo/GitHubLogo.svelte';
-  import { Code, Users, Zap, Mail, ChevronDown } from 'lucide-svelte';
+  import { Icon } from '@3xpo/svelte-bootstrap-ico';
 
   let contentSection: HTMLElement;
   let isScrolling = false;
   let scrollProgress = 0;
-  let lastScrollTop = 0;
 
   onMount(() => {
     window.addEventListener('scroll', handleScroll);
@@ -24,35 +23,35 @@
     };
   });
 
-  function handleScroll() {
+  const handleScroll = () => {
     if (!isScrolling) {
       requestAnimationFrame(updateScrollProgress);
     }
     isScrolling = true;
-  }
+  };
 
-  function handleWheel(event: WheelEvent) {
+  const handleWheel = (event: WheelEvent) => {
     const currentScrollTop = window.scrollY;
     if (currentScrollTop === 0 && event.deltaY > 0) {
       event.preventDefault();
       scrollToContent();
-    } else if (currentScrollTop <= contentSection.offsetTop && event.deltaY < 0) {
+    } else if (
+      currentScrollTop <= contentSection.offsetTop &&
+      event.deltaY < 0
+    ) {
       event.preventDefault();
       scrollToTop();
     }
-    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-  }
+  };
 
   let touchStartY: number | undefined;
 
-  function handleTouchStart(event: TouchEvent) {
+  const handleTouchStart = (event: TouchEvent) => {
     touchStartY = event.touches[0].clientY;
-  }
+  };
 
-  function handleTouchMove(event: TouchEvent) {
-    if (touchStartY === undefined) {
-      return;
-    }
+  const handleTouchMove = (event: TouchEvent) => {
+    if (touchStartY === undefined) return;
 
     const touchEndY = event.touches[0].clientY;
     const diff = touchStartY - touchEndY;
@@ -66,12 +65,12 @@
     }
 
     touchStartY = undefined;
-  }
+  };
 
-  function updateScrollProgress() {
+  const updateScrollProgress = () => {
     const maxScroll = contentSection.offsetTop;
     scrollProgress = Math.min(1, window.scrollY / maxScroll);
-    
+
     if (scrollProgress < 1) {
       requestAnimationFrame(updateScrollProgress);
     } else {
@@ -79,55 +78,51 @@
     }
 
     applyBounceEffect();
-  }
+  };
 
-  function applyBounceEffect() {
-    const bounce = Math.sin(scrollProgress * Math.PI) * (1 - scrollProgress) * 50;
+  const applyBounceEffect = () => {
+    const bounce =
+      Math.sin(scrollProgress * Math.PI) * (1 - scrollProgress) * 50;
     contentSection.style.transform = `translateY(${bounce}px)`;
-  }
+  };
 
-  function scrollToContent() {
+  const scrollToContent = () => {
     smoothScroll(contentSection.offsetTop);
-  }
+  };
 
-  function scrollToTop() {
+  const scrollToTop = () => {
     smoothScroll(0);
-  }
+  };
 
-  function smoothScroll(targetPosition: number) {
+  const smoothScroll = (targetPosition: number) => {
     isScrolling = true;
     const start = window.scrollY;
     const distance = targetPosition - start;
     const duration = 1000; // ms
     const startTime = performance.now();
 
-    function animate(currentTime: number) {
+    const animate = (currentTime: number) => {
       const elapsedTime = currentTime - startTime;
       const progress = Math.min(elapsedTime / duration, 1);
       const easeProgress = easeOutQuad(progress);
-      
+
       window.scrollTo(0, start + distance * easeProgress);
 
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        isScrolling = false;
-      }
-    }
+      if (progress < 1) requestAnimationFrame(animate);
+      else isScrolling = false;
+    };
 
     requestAnimationFrame(animate);
-  }
+  };
 
-  function easeOutQuad(t: number): number {
-    return t * (2 - t);
-  }
+  const easeOutQuad = (t: number) => t * (2 - t);
 
-  function handleKeyDown(event: KeyboardEvent) {
+  const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       scrollToContent();
     }
-  }
+  };
 </script>
 
 <MetaballPage />
@@ -139,6 +134,10 @@
   <meta name="og:image" content="/favicon.png" />
   <meta name="theme-color" content="#429bfb" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.expo.moe/icon?family=Bootstrap%20Icons"
+  />
 </svelte:head>
 
 <div
@@ -147,14 +146,18 @@
   <div class="flex-1"></div>
   <Logo height={75} />
   <div class="flex-1 flex justify-end">
-    <a href="https://github.com/ScriptWare-Software" target="_blank" rel="noopener noreferrer" class="github-link">
+    <a
+      href="https://github.com/ScriptWare-Software"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-link"
+    >
       <GitHubLogo width={32} height={32} />
     </a>
   </div>
 </div>
 
 <div class="main w-full">
-  
   <div
     class="hero h-screen flex items-center justify-center flex-col relative overflow-hidden"
   >
@@ -162,65 +165,104 @@
       class="hero-content flex items-center content-center flex-col backdrop-blur-xl rounded-xl p-4 sm:p-8 text-center"
     >
       <h1 class="text-3xl sm:text-4xl font-bold -mb-2 sm:-mb-4 -mt-4 sm:-mt-8">
-        <a href="https://discord.gg/scripting" target="_blank" rel="noopener noreferrer" class="discord-link">
+        <a
+          href="https://discord.gg/scripting"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="discord-link"
+        >
           <Logo height={169} />
         </a>
       </h1>
-      <p class="text-lg sm:text-xl italic mt-4">Accelerating what makes execution fun!</p>
+      <p class="text-lg sm:text-xl italic mt-4">
+        Accelerating what makes execution fun!
+      </p>
     </div>
     <button
-      class="scroll-hint absolute bottom-8 animate-bounce z-10 bg-transparent border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-full p-2"
+      class="scroll-hint absolute bottom-8 animate-pulse z-10 bg-transparent border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-full p-2 transition-all"
       on:click={scrollToContent}
       on:keydown={handleKeyDown}
       aria-label="Scroll to content"
     >
-      <ChevronDown size={32} class="text-white" />
+      <Icon icon="chevron-down" class="text-white text-2xl font-bold" />
     </button>
   </div>
 
-  <div bind:this={contentSection} class="content-section min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
+  <div
+    bind:this={contentSection}
+    class="content-section min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center"
+  >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <div class="text-center mb-12 sm:mb-16">
-        <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 sm:mb-6 leading-tight">Transforming Ideas into Reality</h2>
-        <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-          At Script-Ware, we develop software experiences that push the boundaries of what's typical.
+        <h2
+          class="text-3xl sm:text-5xl font-extrabold text-white mb-4 sm:mb-6 leading-tight"
+        >
+          Transforming Ideas into Reality
+        </h2>
+        <p
+          class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+        >
+          At Script-Ware, we develop software experiences that push the
+          boundaries of what's typical.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 mb-12 sm:mb-16">
-        <div class="bg-gray-800 rounded-lg p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300 ease-in-out flex flex-col items-center text-center">
-          <div class="text-blue-400 mb-4">
-            <Code size={48} />
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 mb-12 sm:mb-16"
+      >
+        <div
+          class="bg-gray-800 rounded-lg p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300 ease-in-out flex flex-col items-center text-center"
+        >
+          <div class="text-blue-400 -mt-5 -mb-2 text-[3.5rem]">
+            <Icon icon="code" />
           </div>
-          <h3 class="text-xl sm:text-2xl font-semibold text-white mb-4">Innovative Solutions</h3>
+          <h3 class="text-xl sm:text-2xl font-semibold text-white mb-4">
+            Innovative Solutions
+          </h3>
           <p class="text-gray-300">
-            Innovative concepts made into usable software, Script-Ware was built through innovation and is at the forefront of it.
+            Innovative concepts made into usable software, Script-Ware was built
+            through innovation and is at the forefront of it.
           </p>
         </div>
 
-        <div class="bg-gray-800 rounded-lg p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300 ease-in-out flex flex-col items-center text-center">
-          <div class="text-green-400 mb-4">
-            <Users size={48} />
+        <div
+          class="bg-gray-800 rounded-lg p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300 ease-in-out flex flex-col items-center text-center"
+        >
+          <div class="text-green-400 -mt-5 -mb-2 text-[3.5rem]">
+            <Icon icon="people" />
           </div>
-          <h3 class="text-xl sm:text-2xl font-semibold text-white mb-4">Vibrant Community</h3>
+          <h3 class="text-xl sm:text-2xl font-semibold text-white mb-4">
+            Vibrant Community
+          </h3>
           <p class="text-gray-300">
-            Join a thriving ecosystem of individuals who have loved Script-Ware's software
+            Join a thriving ecosystem of individuals who have loved
+            Script-Ware's software
           </p>
         </div>
 
-        <div class="bg-gray-800 rounded-lg p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300 ease-in-out flex flex-col items-center text-center">
-          <div class="text-yellow-400 mb-4">
-            <Zap size={48} />
+        <div
+          class="bg-gray-800 rounded-lg p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300 ease-in-out flex flex-col items-center text-center"
+        >
+          <div class="text-yellow-400 -mt-5 -mb-2 text-[3.5rem]">
+            <Icon icon="lightning-charge" />
           </div>
-          <h3 class="text-xl sm:text-2xl font-semibold text-white mb-4">Performance</h3>
+          <h3 class="text-xl sm:text-2xl font-semibold text-white mb-4">
+            Performance
+          </h3>
           <p class="text-gray-300">
-            Sleek, swift, and stress-free: software that simply works. Script-Ware prides itself on efficient solutions.
+            Sleek, swift, and stress-free: software that simply works.
+            Script-Ware prides itself on efficient solutions.
           </p>
         </div>
       </div>
 
       <div class="text-center">
-        <a href="https://discord.gg/scripting" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 sm:py-4 sm:px-10 rounded-full hover:bg-blue-700 transition-colors duration-300 text-base sm:text-lg" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://discord.gg/scripting"
+          class="inline-block bg-blue-600 text-white font-bold py-3 px-8 sm:py-4 sm:px-10 rounded-full hover:bg-blue-700 transition-colors duration-300 text-base sm:text-lg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Join our community now
         </a>
       </div>
@@ -233,28 +275,56 @@
         <div class="col-span-1 lg:col-span-2">
           <Logo height={50} />
           <p class="mt-4 text-gray-400">
-           Accelerating what makes execution fun!<br>Established in 2020.
+            Accelerating what makes execution fun!<br />Established in 2020.
           </p>
         </div>
         <div>
           <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
           <ul class="space-y-2">
-            <li><a href="https://discord.gg/scripting" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank" rel="noopener noreferrer">Discord</a></li>
-            <li><a href="https://github.com/ScriptWare-Software" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li>
+              <a
+                href="https://discord.gg/scripting"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+                target="_blank"
+                rel="noopener noreferrer">Discord</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/ScriptWare-Software"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+                target="_blank"
+                rel="noopener noreferrer">GitHub</a
+              >
+            </li>
           </ul>
         </div>
         <div>
           <h3 class="text-lg font-semibold mb-4">Connect</h3>
           <ul class="space-y-2">
-            <li><a href="mailto:contact@script-ware.com" class="text-gray-400 hover:text-white transition-colors duration-300">Contact Us</a></li>
+            <li>
+              <a
+                href="mailto:contact@script-ware.com"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+                >Contact Us</a
+              >
+            </li>
           </ul>
         </div>
       </div>
-      <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center">
-        <p class="text-gray-400 text-center sm:text-left">&copy; 2024 ScriptWare Software LTD. All rights reserved.</p>
+      <div
+        class="mt-8 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center"
+      >
+        <p class="text-gray-400 text-center sm:text-left">
+          &copy; 2024 ScriptWare Software LTD. All rights reserved.
+        </p>
         <div class="flex space-x-4 mt-4 sm:mt-0">
-          <a href="mailto:contact@script-ware.com" aria-label="Email" class="text-gray-400 hover:text-white transition-colors duration-300">
-            <Mail size={24} />
+          <a
+            href="mailto:contact@script-ware.com"
+            aria-label="Email"
+            class="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            <Icon icon="envelope" class="text-xl" />
           </a>
         </div>
       </div>
@@ -262,25 +332,19 @@
   </footer>
 </div>
 
-<style>
-  .github-link:hover :global(svg) {
-    filter: brightness(0.9);
-  }
+<style lang="postcss">
+  .github-link:hover :global(svg),
   .discord-link:hover :global(svg) {
     filter: brightness(0.9);
   }
   .scroll-hint {
     transition: opacity 0.3s ease-in-out;
-  }
-  .scroll-hint:hover, .scroll-hint:focus {
-    opacity: 0.7;
+    &:hover,
+    &:focus {
+      opacity: 0.7;
+    }
   }
   .content-section {
     transition: transform 0.1s ease-out;
-  }
-  @media (max-width: 640px) {
-    .hero-content {
-      padding: 1rem;
-    }
   }
 </style>
