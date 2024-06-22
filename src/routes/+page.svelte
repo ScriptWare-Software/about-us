@@ -1,128 +1,11 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import MetaballPage from '$lib/components/util/MetaballPage.svelte';
   import Logo from '$lib/components/branding/logo/WideLogo.svelte';
   import GitHubLogo from '$lib/components/branding/logo/GitHubLogo.svelte';
   import { Icon } from '@3xpo/svelte-bootstrap-ico';
+  import { keyToClick } from '$lib/util/keyToClick';
 
-  let contentSection: HTMLElement;
-  let isScrolling = false;
-  let scrollProgress = 0;
-
-  onMount(() => {
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
-    };
-  });
-
-  const handleScroll = () => {
-    if (!isScrolling) {
-      requestAnimationFrame(updateScrollProgress);
-    }
-    isScrolling = true;
-  };
-
-  const handleWheel = (event: WheelEvent) => {
-    const currentScrollTop = window.scrollY;
-    if (currentScrollTop === 0 && event.deltaY > 0) {
-      event.preventDefault();
-      scrollToContent();
-    } else if (
-      currentScrollTop <= contentSection.offsetTop &&
-      event.deltaY < 0
-    ) {
-      event.preventDefault();
-      scrollToTop();
-    }
-  };
-
-  let touchStartY: number | undefined;
-
-  const handleTouchStart = (event: TouchEvent) => {
-    touchStartY = event.touches[0].clientY;
-  };
-
-  const handleTouchMove = (event: TouchEvent) => {
-    if (touchStartY === undefined) return;
-
-    const touchEndY = event.touches[0].clientY;
-    const diff = touchStartY - touchEndY;
-
-    if (window.scrollY === 0 && diff > 0) {
-      event.preventDefault();
-      scrollToContent();
-    } else if (window.scrollY <= contentSection.offsetTop && diff < 0) {
-      event.preventDefault();
-      scrollToTop();
-    }
-
-    touchStartY = undefined;
-  };
-
-  const updateScrollProgress = () => {
-    const maxScroll = contentSection.offsetTop;
-    scrollProgress = Math.min(1, window.scrollY / maxScroll);
-
-    if (scrollProgress < 1) {
-      requestAnimationFrame(updateScrollProgress);
-    } else {
-      isScrolling = false;
-    }
-
-    applyBounceEffect();
-  };
-
-  const applyBounceEffect = () => {
-    const bounce =
-      Math.sin(scrollProgress * Math.PI) * (1 - scrollProgress) * 50;
-    contentSection.style.transform = `translateY(${bounce}px)`;
-  };
-
-  const scrollToContent = () => {
-    smoothScroll(contentSection.offsetTop);
-  };
-
-  const scrollToTop = () => {
-    smoothScroll(0);
-  };
-
-  const smoothScroll = (targetPosition: number) => {
-    isScrolling = true;
-    const start = window.scrollY;
-    const distance = targetPosition - start;
-    const duration = 1000; // ms
-    const startTime = performance.now();
-
-    const animate = (currentTime: number) => {
-      const elapsedTime = currentTime - startTime;
-      const progress = Math.min(elapsedTime / duration, 1);
-      const easeProgress = easeOutQuad(progress);
-
-      window.scrollTo(0, start + distance * easeProgress);
-
-      if (progress < 1) requestAnimationFrame(animate);
-      else isScrolling = false;
-    };
-
-    requestAnimationFrame(animate);
-  };
-
-  const easeOutQuad = (t: number) => t * (2 - t);
-
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      scrollToContent();
-    }
-  };
+  let contentSection: HTMLDivElement | null = null;
 </script>
 
 <MetaballPage />
@@ -140,8 +23,9 @@
   />
 </svelte:head>
 
+<!-- TODO: use sticky in place of fixed, and make the next element account for the height of the titlebar -->
 <div
-  class="header top-0 sticky w-full flex items-center justify-between bg-black bg-opacity-20 backdrop-blur-xl px-4 sm:px-8 z-20"
+  class="header top-0 fixed w-full flex items-center justify-between bg-black bg-opacity-20 backdrop-blur-xl px-4 sm:px-8 z-20"
 >
   <div class="flex-1"></div>
   <Logo height={75} />
@@ -180,8 +64,10 @@
     </div>
     <button
       class="scroll-hint absolute bottom-8 animate-pulse z-10 bg-transparent border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-full p-2 transition-all"
-      on:click={scrollToContent}
-      on:keydown={handleKeyDown}
+      on:click={() => {
+        contentSection?.scrollIntoView();
+      }}
+      on:keydown={keyToClick}
       aria-label="Scroll to content"
     >
       <Icon icon="chevron-down" class="text-white text-2xl font-bold" />
