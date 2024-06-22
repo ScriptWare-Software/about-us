@@ -76,7 +76,7 @@
 
   <div
     bind:this={contentSection}
-    class="content-section min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center"
+    class="content-section min-h-screen bg-gradient-to-b from-[#0005] via-[#070A10ee] to-gray-900 backdrop-blur-2xl flex items-center justify-center"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <div class="text-center mb-12 sm:mb-16">
