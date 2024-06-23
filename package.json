@@ -27,7 +27,7 @@
   },
   "type": "module",
   "dependencies": {
-    "lucide-svelte": "^0.396.0",
+    "@3xpo/svelte-bootstrap-ico": "^0.1.5",
     "svelte-metaballs": "^0.1.1"
   }
 }

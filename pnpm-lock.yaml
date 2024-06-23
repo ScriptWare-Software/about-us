@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      lucide-svelte:
-        specifier: ^0.396.0
-        version: 0.396.0(svelte@4.2.18)
+      '@3xpo/svelte-bootstrap-ico':
+        specifier: ^0.1.5
+        version: 0.1.5(svelte@4.2.18)
       svelte-metaballs:
         specifier: ^0.1.1
         version: 0.1.2(svelte@4.2.18)
@@ -59,6 +59,11 @@ importers:
         version: 5.3.1(sass@1.77.6)
 
 packages:
+
+  '@3xpo/svelte-bootstrap-ico@0.1.5':
+    resolution: {integrity: sha512-Yk9C/rb+Cjj60u8+4lUTSRyF4DYLU3njIyLfmuLzuT1NIXBwoIMCrzZ5BBWnjffKkZoadpPjfR9hunBxArDVFA==}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0
 
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -416,6 +421,9 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
 
+  bootstrap-icons@1.11.3:
+    resolution: {integrity: sha512-+3lpHrCw/it2/7lBL15VR0HEumaBss0+f/Lb6ZvHISn1mlK83jjFpooTLsMWbIjJMDjDjOExMsTxnXSIT4k4ww==}
+
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
 
@@ -679,11 +687,6 @@ packages:
   lru-cache@10.2.2:
     resolution: {integrity: sha512-9hp3Vp2/hFQUiIwKo8XCeFVnrg8Pk3TYNPIR7tJADKi5YfcF7vEaK7avFHTlSy3kOKYaJQaalfEo6YuXdceBOQ==}
     engines: {node: 14 || >=16.14}
-
-  lucide-svelte@0.396.0:
-    resolution: {integrity: sha512-0oU3ZwQYzlFB1VyXcCRn1/cTsA+J7d+6MTC9t8lyIz12l0Rcrnoq0LUrGjX1I3r14uwSGrNDUTkdRdrHsl8L1Q==}
-    peerDependencies:
-      svelte: ^3 || ^4 || ^5.0.0-next.42
 
   magic-string@0.30.10:
     resolution: {integrity: sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==}
@@ -1117,6 +1120,12 @@ packages:
 
 snapshots:
 
+  '@3xpo/svelte-bootstrap-ico@0.1.5(svelte@4.2.18)':
+    dependencies:
+      svelte: 4.2.18
+    optionalDependencies:
+      bootstrap-icons: 1.11.3
+
   '@alloc/quick-lru@5.2.0': {}
 
   '@ampproject/remapping@2.3.0':
@@ -1378,6 +1387,9 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
+  bootstrap-icons@1.11.3:
+    optional: true
+
   brace-expansion@1.1.11:
     dependencies:
       balanced-match: 1.0.2
@@ -1636,10 +1648,6 @@ snapshots:
   locate-character@3.0.0: {}
 
   lru-cache@10.2.2: {}
-
-  lucide-svelte@0.396.0(svelte@4.2.18):
-    dependencies:
-      svelte: 4.2.18
 
   magic-string@0.30.10:
     dependencies:
