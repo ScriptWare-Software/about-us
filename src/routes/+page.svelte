@@ -50,7 +50,7 @@
     >
       <h1 class="text-3xl sm:text-4xl font-bold -mb-2 sm:-mb-4 -mt-4 sm:-mt-8">
         <a
-          href="https://discord.gg/script-ware"
+          href="https://discord.gg/scripting"
           target="_blank"
           rel="noopener noreferrer"
           class="discord-link"
@@ -144,7 +144,7 @@
 
       <div class="text-center">
         <a
-          href="https://discord.gg/script-ware"
+          href="https://discord.gg/scripting"
           class="inline-block bg-blue-600 text-white font-bold py-3 px-8 sm:py-4 sm:px-10 rounded-full hover:bg-blue-700 transition-colors duration-300 text-base sm:text-lg"
           target="_blank"
           rel="noopener noreferrer"
@@ -169,7 +169,7 @@
           <ul class="space-y-2">
             <li>
               <a
-                href="https://discord.gg/script-ware"
+                href="https://discord.gg/scripting"
                 class="text-gray-400 hover:text-white transition-colors duration-300"
                 target="_blank"
                 rel="noopener noreferrer">Discord</a
