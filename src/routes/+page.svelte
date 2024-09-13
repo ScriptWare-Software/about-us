@@ -21,6 +21,7 @@
     rel="stylesheet"
     href="https://fonts.expo.moe/icon?family=Bootstrap%20Icons"
   />
+  <link rel="canonical" href="https://script-ware.com/" />
 </svelte:head>
 
 <!-- TODO: use sticky in place of fixed, and make the next element account for the height of the titlebar -->
