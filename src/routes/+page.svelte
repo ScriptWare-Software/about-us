@@ -138,7 +138,7 @@
           </h3>
           <p class="text-gray-300">
             Sleek, swift, and stress-free: software that simply works.
-            Script-Ware prides itself on efficient solutions.
+            Script-Ware prides itself on efficient, fun, solutions.
           </p>
         </div>
       </div>
